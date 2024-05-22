@@ -37,11 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'crm',
+    'User.UserConfig',
     'rest_framework',
     'django_filters',
-    'api',
+    'Notes.NotesConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'elevate.urls'
+ROOT_URLCONF = 'noteshare-backend.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'elevate.wsgi.application'
+WSGI_APPLICATION = 'Notes.wsgi.application'
 
 
 # Database
@@ -80,10 +79,14 @@ WSGI_APPLICATION = 'elevate.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',  # Replace with your adapter
+        'NAME': 'noteshare',
+        'USER': 'noteshare',
+        'PASSWORD': '6387',
+        'HOST': 'localhost',  # Usually 'localhost' unless using a remote server
+        'PORT': '3306',  # Default port for your database
     }
-}
+    }
 
 
 # Password validation
