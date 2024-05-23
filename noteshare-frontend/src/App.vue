@@ -5,8 +5,7 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue'
-
+import SignUpPage from './components/SignUpPage.vue'
 export default {
   name: 'App',
   components: {
