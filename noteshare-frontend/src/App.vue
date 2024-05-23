@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Navbar />
+    <NavBar />
   </div>
 </template>
 
 <script>
-import Navbar from './components/NavBar.vue'
+import NavBar from './components/NavBar.vue'
 
 export default {
   name: 'App',

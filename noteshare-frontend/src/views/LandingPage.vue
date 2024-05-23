@@ -1,7 +1,6 @@
 <template>
     <v-app>
-      <NavBar />
- 
+      
       <!-- Body -->
       <v-main>
         <v-container class="grey lighten-3 py-16">
