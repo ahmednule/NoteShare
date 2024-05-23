@@ -17,6 +17,15 @@ export default{
         scroll(refName){
             const element = document.getElementById(refName);
             element.scrollIntoView({behavior: 'smooth'});
+        },
+        goToSignUp(){
+            this.router.push('/signup')
+        },
+        goToProfile(){
+            this.$router.push('/profile');  
+        },
+        goToLogin(){
+            this.$router.push('/login');
         }
     }
 }
@@ -24,5 +33,10 @@ export default{
 </script>
 
 <style scoped>
+nav{
+    background-color: black;
+    color: white;
+    padding: 1rem;
+}
 
 </style>
