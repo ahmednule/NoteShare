@@ -41,7 +41,7 @@
       </v-main>
  
       <!-- Bottom Bar -->
-      <v-footer app color="white" class="text-center">
+      <v-footer app color="grey" class="text-center">
         <v-col>
           <v-icon>mdi-youtube</v-icon>
           <v-icon>mdi-twitter</v-icon>
