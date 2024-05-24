@@ -1,8 +1,13 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
     <LandingPage />
      </div>
   <router-view> </router-view>
+=======
+    <router-view></router-view>
+  </div>
+>>>>>>> Saisa
 </template>
 
 <script>
@@ -18,6 +23,14 @@ export default {
 </script>
 
 <style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #584e4e;
+  margin-top: 60px;
+}
 /* Add global styles here */
 body {
   font-family: Arial, sans-serif;
@@ -25,3 +38,4 @@ body {
   padding: 0;
 }
 </style>
+
