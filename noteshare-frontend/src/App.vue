@@ -1,12 +1,24 @@
 <template>
-  <SignUpPage />
+  <div id="app">
+<<<<<<< HEAD
+    <LandingPage />
+     </div>
+  <router-view> </router-view>
+=======
+    <router-view></router-view>
+  </div>
+>>>>>>> Saisa
 </template>
 
 <script>
-import SignUpPage from './components/SignUpPage.vue'
+import LandingPage from './views/LandingPage.vue'
+import Home from './views/Home.vue'
 export default {
   name: 'App',
-  components: { SignUpPage }
+  components: {
+    LandingPage,
+    Home
+  }
 }
 </script>
 
@@ -16,12 +28,14 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #584e4e;
   margin-top: 60px;
 }
-body{
+/* Add global styles here */
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #eee;
 }
 </style>
+
