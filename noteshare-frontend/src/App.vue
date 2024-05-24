@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <LandingPage />
+    <router-view></router-view>
   </div>
 </template>
 
@@ -16,6 +16,14 @@ export default {
 </script>
 
 <style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #584e4e;
+  margin-top: 60px;
+}
 /* Add global styles here */
 body {
   font-family: Arial, sans-serif;
@@ -23,3 +31,4 @@ body {
   padding: 0;
 }
 </style>
+
