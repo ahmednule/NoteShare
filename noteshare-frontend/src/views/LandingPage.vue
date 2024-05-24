@@ -15,7 +15,7 @@
         <v-container class="grey lighten-3 py-16">
           <v-row>
             <v-col class="text-center">
-              <v-btn color="blue" class="ma-2">University</v-btn>
+              <v-btn color="grey" class="ma-2">University</v-btn>
               <v-btn color="blue" class="ma-2">College</v-btn>
               <v-btn color="blue" class="ma-2">High School</v-btn>
             </v-col>
@@ -56,6 +56,6 @@
  
   <style scoped>
   .v-application {
-    background-color: #666161;
+    background-color: #584e4e;
   }
   </style>
