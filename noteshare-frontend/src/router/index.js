@@ -1,41 +1,43 @@
-<<<<<<< HEAD
 import { createRouter, createWebHistory } from 'vue-router'
-import LandingPage from '../views/LandingPage.vue'
-=======
-// src/router/index.js
-import { createRouter, createWebHistory } from 'vue-router';
-import LandingPage from '../views/LandingPage.vue';
-import Login from '../components/LoginPage.vue';
-import SignUp from '../components/SignUpPage.vue';
+import LogoutView from '../views/LogoutView.vue'
+import DashboardView from '../views/DashboardView.vue'
+import SearchView from '../views/SearchView.vue'
+import SettingView from '../views/SettingView.vue'
+import ProfileView from '../views/ProfileView.vue'
 
->>>>>>> Saisa
+
+
 const routes = [
   {
-    path: '/',
-    name: 'LandingPage',
-    component: LandingPage
+    path: '/logout',
+    name: 'logout',
+    component: LogoutView
   },
   {
-<<<<<<< HEAD
-    path: '/home',
-    name: 'Home',
-    component: () => import('../views/Home.vue'),
-=======
-    path: '/signup',
-    name: 'SignUp',
-    component: SignUp,
+    path: '/dashboard',
+    name: 'dashboard',
+    component: DashboardView
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login,
->>>>>>> Saisa
-  }
-];
+    path: '/search',
+    name: 'search',
+    component: SearchView
+  },
+  {
+path: '/settings',
+name: 'settings',
+component: SettingView
+  },
+  {
+  path: '/profile',
+name: 'profile',
+component: ProfileView
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-});
+})
 
-export default router;
+export default router
