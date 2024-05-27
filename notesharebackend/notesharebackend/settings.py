@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
+from google.oauth2 import service_account
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,13 +32,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'User.apps.UserConfig',
+    'Notes.apps.NotesConfig',
+    'storages',
 ]
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GOOGLE_APPLICATION_CREDENTIALS = os.path.join(BASE_DIR, 'noteshare-424406-7bb497c4f4d3.json')
+GS_BUCKET_NAME = 'nyams-noteshare'
+GS_PROJECT_ID = 'noteshare-424406'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,9 +84,13 @@ WSGI_APPLICATION = 'notesharebackend.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default': {
+        'ENGINE': 'django.db.backends.mysql',  # Replace with your adapter
+        'NAME': 'noteshare',
+        'USER': 'noteshare',
+        'PASSWORD': '6387',
+        'HOST': 'localhost',  # Usually 'localhost' unless using a remote server
+        'PORT': '3306',  # Default port for your database
     }
 }
 
@@ -121,3 +135,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'User.User'
