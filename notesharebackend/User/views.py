@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from .models import User
-from .serialisers import UserSerializer
+from .serializers import UserSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     #queryset = User.objects.all()
