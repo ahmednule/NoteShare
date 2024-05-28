@@ -22,16 +22,14 @@
         <v-row align="center">
           <v-col cols="auto">
           
-            <v-spacer></v-spacer>
+            
           </v-col>
           <v-col class="d-none d-lg-flex">
-            <v-btn text href="#header">Home</v-btn>
             <v-btn text href="#services">Services</v-btn>
-            <v-btn text href="#about">About</v-btn>
+            <v-spacer></v-spacer>
             <v-btn text href="#features">Features</v-btn>
             <v-menu offset-y>
               <template v-slot:activator="{ on, attrs }">
-                <v-btn text v-bind="attrs" v-on="on">Drop</v-btn>
               </template>
               <v-list>
                 <v-list-item link>
@@ -56,7 +54,7 @@
 
     <v-main>
       <header id="header" class="header">
-        <v-container>
+        <v-container class="custom-container">
           <v-row>
             <v-col cols="12" lg="6">
               <div class="text-container">
@@ -81,11 +79,10 @@
         </v-col>
             <v-col cols="12" lg="6">
               <div class="text-container">
-                <h1 class="display-1">Empower Learning Together</h1>
-                <p class="subtitle-1">NoteShare is a collaborative platform designed to facilitate seamless sharing of academic notes among students across universities, 
-                  colleges, and high schools. It empowers learners to enhance their educational journey by accessing a diverse array of study materials contributed by peers.
-                   Whether preparing for exams, researching topics, or exploring new subjects,
-                   NoteShare fosters a supportive community where knowledge is shared, connections are forged, and learning becomes a collective endeavor.</p>
+                <h1 class="display-1">Unlock Your Academic Potential</h1>
+                <p class="subtitle-1">"Dive into a pool of knowledge shared by fellow students. NoteShare is your gateway to better grades and a richer educational experience."
+                  Join a community of learners. Share notes, gain insights, and achieve your academic goals with the help of NoteShare.
+                </p>
                 <v-btn large class="custom-gradient" color="primary" href="#services">Available Subjects</v-btn>
               </div>
             </v-col>
@@ -95,7 +92,7 @@
           </v-row>
         </v-container>
 
-      <v-container class="gradient-container py-10">
+      <v-container class="custom-container py-10">
         <v-row>
           <v-col class="text-center">
             <v-btn color="black" class="cusstom-gradient">University</v-btn>
