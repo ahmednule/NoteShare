@@ -1,13 +1,7 @@
 <template>
   <div id="app">
-<<<<<<< HEAD
-    <LandingPage />
-     </div>
-  <router-view> </router-view>
-=======
     <router-view></router-view>
   </div>
->>>>>>> Saisa
 </template>
 
 <script>

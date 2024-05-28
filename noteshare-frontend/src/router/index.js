@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-import { createRouter, createWebHistory } from 'vue-router'
-import LandingPage from '../views/LandingPage.vue'
-=======
 // src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router';
 import LandingPage from '../views/LandingPage.vue';
 import Login from '../components/LoginPage.vue';
 import SignUp from '../components/SignUpPage.vue';
 
->>>>>>> Saisa
 const routes = [
   {
     path: '/',
@@ -16,11 +11,6 @@ const routes = [
     component: LandingPage
   },
   {
-<<<<<<< HEAD
-    path: '/home',
-    name: 'Home',
-    component: () => import('../views/Home.vue'),
-=======
     path: '/signup',
     name: 'SignUp',
     component: SignUp,
@@ -29,7 +19,6 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
->>>>>>> Saisa
   }
 ];
 
