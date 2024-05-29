@@ -59,7 +59,7 @@ class FileDownloaderView(views.APIView):
         if not file_name:
             return Response({'error': 'File name not provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
-         # Create a Cloud Storage client
+        # Create a Cloud Storage client
         client = storage.Client()
         
         # Get the bucket
@@ -76,3 +76,27 @@ class FileDownloaderView(views.APIView):
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
 
         return response
+
+class FileSearchView(views.APIView):
+    def get(self, request):
+        # Extract search term from request (assuming query string)
+        search_term = request.query_params.get('search_term')
+
+        # Check if search term is provided
+        if not search_term:
+            return Response({'error': 'Missing search term parameter'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Create a Cloud Storage client
+        client = storage.Client()
+        
+        # Get the bucket
+        bucket = client.bucket(bucket_name)
+
+        # List all blobs in the bucket (adjust for filtering based on search term)
+        blobs = bucket.list_blobs()
+
+        # Filter results based on search term (implement your logic here)
+        filtered_files = [blob.name for blob in blobs if search_term in blob.name]  # Simple example
+
+        # Return search results
+        return Response({'files': filtered_files}, status=status.HTTP_200_OK)
