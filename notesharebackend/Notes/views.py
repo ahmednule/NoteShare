@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from google.auth import default
 from .serializers import FileSerializer
+import os
 
 credentials, project_id = default()
 bucket_name ='nyams-noteshare'
@@ -17,21 +18,33 @@ class FileUploadView(views.APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        user = request.user
+        # Validate the file
         serializer = FileSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         # Get the uploaded file
         file = serializer.validated_data['file']
 
+        # Generate a unique filename with extension
+        import uuid
+        filename, extension = os.path.splitext(file.name)
+        unique_filename = f'{filename}_{uuid.uuid4()}.{extension}'
+        
         # Create a Cloud Storage client
         client = storage.Client()
 
-        # Get the bucket
+        # Get the bucket and load the metadata
         bucket = client.bucket(bucket_name)
+        metadata = {'uploaded_by': user.username,
+                    'content_type': file.content_type,
+                    'size': file.size,
+                    'subject': serializer.validated_data['subject']
+                    }
 
-        # Create a new blob and upload the file
-        blob = bucket.blob(file.name)
-        blob.upload_from_file(file)
+        # Upload the file with metadata
+        blob = bucket.blob(unique_filename)
+        blob.upload_from_string(file.read(),  metadata=metadata)
 
         # Return a success response
         return Response({'message': 'File uploaded successfully.'}, status=status.HTTP_201_CREATED)
