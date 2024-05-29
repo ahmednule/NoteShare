@@ -6,7 +6,7 @@ from google.cloud import storage
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from google.auth import default
-from .serializers import FileUploadSerializer
+from .serializers import FileSerializer
 
 credentials, project_id = default()
 bucket_name ='nyams-noteshare'
@@ -17,7 +17,7 @@ class FileUploadView(views.APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        serializer = FileUploadSerializer(data=request.data)
+        serializer = FileSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         # Get the uploaded file
@@ -80,10 +80,10 @@ class FileDownloaderView(views.APIView):
 class FileSearchView(views.APIView):
     def get(self, request):
         # Extract search term from request (assuming query string)
-        search_term = request.query_params.get('search_term')
+        file = request.query_params.get('file')
 
         # Check if search term is provided
-        if not search_term:
+        if not file:
             return Response({'error': 'Missing search term parameter'}, status=status.HTTP_400_BAD_REQUEST)
         
         # Create a Cloud Storage client
@@ -96,7 +96,7 @@ class FileSearchView(views.APIView):
         blobs = bucket.list_blobs()
 
         # Filter results based on search term (implement your logic here)
-        filtered_files = [blob.name for blob in blobs if search_term in blob.name]  # Simple example
+        filtered_files = [blob.name for blob in blobs if file in blob.name]  # Simple example
 
         # Return search results
         return Response({'files': filtered_files}, status=status.HTTP_200_OK)
