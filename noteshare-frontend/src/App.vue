@@ -6,11 +6,12 @@
 
 <script>
 import LandingPage from './views/LandingPage.vue'
-
+import Home from './views/Home.vue'
 export default {
   name: 'App',
   components: {
-    LandingPage
+    LandingPage,
+    Home
   }
 }
 </script>
@@ -21,7 +22,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #584e4e;
+  color: #6b0909;
   margin-top: 60px;
 }
 /* Add global styles here */
@@ -31,4 +32,3 @@ body {
   padding: 0;
 }
 </style>
-
