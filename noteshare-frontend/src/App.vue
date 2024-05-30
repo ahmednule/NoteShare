@@ -1,7 +1,7 @@
 <template>
   <v-app color="grey">
     <HeaderView app/>
-    <v-content class="mx-5 mb-5y" color="red">
+    <v-content>
       <router-view/>
     </v-content>
   </v-app>
