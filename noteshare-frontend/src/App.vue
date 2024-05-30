@@ -1,18 +1,20 @@
 <template>
   <v-app color="grey">
-    <HeaderView app/>
+    <HeaderView/>
     <v-content>
       <router-view/>
     </v-content>
+    <FooterView />
   </v-app>
 </template>
 
 <script>
 import HeaderView from '@/components/HeaderView'
+import FooterView from '@/components/FooterView'
 export default {
   name: 'App',
   components: {
-   HeaderView
+   HeaderView, FooterView
   },
   data: () => ({
     //

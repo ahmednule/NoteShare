@@ -12,6 +12,15 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
+        <template v-slot:append>
+          <div class="pa-2">
+            <v-btn block color="error">
+                <span>Logout</span>
+                <v-icon> mdi-logout </v-icon>
+             
+            </v-btn>
+          </div>
+        </template> 
       </v-navigation-drawer>
 
       <v-app-bar app dark prominent>
