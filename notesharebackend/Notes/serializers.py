@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-class FileSerializer(serializers.Serializer):
+class FileUploadSerializer(serializers.Serializer):
     file = serializers.FileField()
 
     """def create(self, validated_data):
