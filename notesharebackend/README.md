@@ -1,4 +1,4 @@
-##noteshare-backend
+## noteshare-backend
 This is our portfolio project at ALX SE where we were required to build a project showcasing our skills learnt during the bootcamp.We were a team of four,2 on frontend and 2 on backend.The backend framework used is django.These are the processes to setup the application incase you clone the repo.
 
 ## Install python 
