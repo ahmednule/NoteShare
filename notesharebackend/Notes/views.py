@@ -15,7 +15,7 @@ bucket_name ='nyams-noteshare'
 
 class FileUploadView(views.APIView):
     parser_classes = [MultiPartParser]
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
 
     def post(self, request):
         user = request.user
@@ -26,25 +26,22 @@ class FileUploadView(views.APIView):
         # Get the uploaded file
         file = serializer.validated_data['file']
 
-        # Generate a unique filename with extension
-        import uuid
-        filename, extension = os.path.splitext(file.name)
-        unique_filename = f'{filename}_{uuid.uuid4()}.{extension}'
         
         # Create a Cloud Storage client
         client = storage.Client()
 
         # Get the bucket and load the metadata
         bucket = client.bucket(bucket_name)
-        metadata = {'uploaded_by': user.username,
+       
+
+        # Upload the file with metadata
+        blob = bucket.blob(file.name)
+        blob.metadata = {#'uploaded_by': user.username,
                     'content_type': file.content_type,
                     'size': file.size,
                     'subject': serializer.validated_data['subject']
                     }
-
-        # Upload the file with metadata
-        blob = bucket.blob(unique_filename)
-        blob.upload_from_string(file.read(),  metadata=metadata)
+        blob.upload_from_file(file, content_type=file.content_type)
 
         # Return a success response
         return Response({'message': 'File uploaded successfully.'}, status=status.HTTP_201_CREATED)
@@ -57,18 +54,27 @@ class FileUploadView(views.APIView):
         
         # Get the blobs
         blobs = bucket.list_blobs()
+
+        #Create a list to store blobs and their metadat
+        files =[]
+        # Loop through the blobs 
+        for blob in blobs:
+            files.append({
+                'name': blob.name,
+                'metadata': blob.metadata
+            })
     
         # Return the list of blob names
-        return Response([blob.name for blob in blobs], status=status.HTTP_200_OK)
+        return Response(files, status=status.HTTP_200_OK)
 
 class FileDownloaderView(views.APIView):
     
     parser_classes = [MultiPartParser]
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
 
     def get(self, request):
         #Get the file name
-        file_name = request.query_params.get('file_name')
+        file_name = request.query_params.get('file')
         if not file_name:
             return Response({'error': 'File name not provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
