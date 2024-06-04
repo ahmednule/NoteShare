@@ -7,7 +7,7 @@ class Note(models.Model):
   Model for notes
   """
   note_id = models.AutoField(primary_key=True)
-  owner = models.ForeignKey(User, on_delete=models.CASCADE)
+  #owner = models.ForeignKey(User, on_delete=models.CASCADE)
   title = models.CharField(max_length=255)
   content = models.TextField()
   date_created = models.DateTimeField(auto_now_add=True)

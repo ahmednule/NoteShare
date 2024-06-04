@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UserViewSet, CustomAuthToken
+from .views import UserViewSet, CustomAuthToken, UserRegisterView
 
 urlpatterns = [
     path('get_user/<int:id>', UserViewSet.as_view({'get': 'get'})),

@@ -1,10 +1,11 @@
 from rest_framework import serializers
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.password_validation import validate_password
+from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AbstractUser
+        model = User
         fields = ['username', 'email', 'first_name', 'last_name', 'password']
         extra_kwargs = {
             'password': {'write_only': True},
