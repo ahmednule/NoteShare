@@ -1,17 +1,18 @@
 from rest_framework import serializers
+from .models import File
 
 class FileSerializer(serializers.Serializer):
     file = serializers.FileField()
     subject = serializers.CharField(max_length=100)
+    user = serializers.CurrentUserDefault()
 
-    """def create(self, validated_data):
-        # Handle file upload logic here
-        # For example, you can save the file to a specific location
-        file = validated_data['file']
-        # Save the file to a specific location
-        # file_path = '/path/to/save/file'
-        # with open(file_path, 'wb') as destination:
-        #     for chunk in file.chunks():
-        #         destination.write(chunk)
-        return validated_data
-    """
+class FileUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = ['id', 'filename', 'content', 'date_created', 'user', 'subject']
+        read_only_fields = ['date_created']
+
+class FileRetrieveSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = ['id', 'filename', 'content', 'user']

@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import FileUploadView, FileDownloaderView, FileSearchView
+from .views import FileDownloaderView, FileSearchView
+from .Db_storage_views import FileUploadView
 
 urlpatterns = [
     path('upload/', FileUploadView.as_view()),

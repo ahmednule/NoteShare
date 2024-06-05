@@ -15,7 +15,7 @@ bucket_name ='nyams-noteshare'
 
 class FileUploadView(views.APIView):
     parser_classes = [MultiPartParser]
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         user = request.user
@@ -70,7 +70,7 @@ class FileUploadView(views.APIView):
 class FileDownloaderView(views.APIView):
     
     parser_classes = [MultiPartParser]
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         #Get the file name
