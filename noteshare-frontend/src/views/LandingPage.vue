@@ -2,7 +2,7 @@
 <template>
   <v-app>
     <!--the Navbar-->
-    <v-app-bar app color="black" dark>
+    <v-app-bar app color="E1C2BB" text-white dark>
       <v-icon color="yellow" left class="mr-2">fas fa-signature</v-icon>NOTESHARE
       <v-spacer></v-spacer>
       <v-btn text>

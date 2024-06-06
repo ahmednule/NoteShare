@@ -7,12 +7,14 @@
 <script>
 import LandingPage from './views/LandingPage.vue'
 import Home from './views/Home.vue'
+import DashBoard from './components/DashBoard.vue'
+import Profile from './views/Profile.vue'
 export default {
   name: 'App',
   components: {
     LandingPage,
-    Home
-  }
+    Home, DashBoard, Profile
+  } 
 }
 </script>
 
