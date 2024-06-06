@@ -2,7 +2,6 @@ from rest_framework import serializers
 
 class FileUploadSerializer(serializers.Serializer):
     file = serializers.FileField()
-    subject = serializers.CharField(max_length=100)
 
     """def create(self, validated_data):
         # Handle file upload logic here

@@ -6,8 +6,7 @@ from google.cloud import storage
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from google.auth import default
-from .serializers import FileSerializer
-import os
+from .serializers import FileUploadSerializer
 
 credentials, project_id = default()
 bucket_name ='nyams-noteshare'
@@ -15,33 +14,24 @@ bucket_name ='nyams-noteshare'
 
 class FileUploadView(views.APIView):
     parser_classes = [MultiPartParser]
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        user = request.user
-        # Validate the file
-        serializer = FileSerializer(data=request.data)
+        serializer = FileUploadSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         # Get the uploaded file
         file = serializer.validated_data['file']
 
-        
         # Create a Cloud Storage client
         client = storage.Client()
 
-        # Get the bucket and load the metadata
+        # Get the bucket
         bucket = client.bucket(bucket_name)
-       
 
-        # Upload the file with metadata
+        # Create a new blob and upload the file
         blob = bucket.blob(file.name)
-        blob.metadata = {#'uploaded_by': user.username,
-                    'content_type': file.content_type,
-                    'size': file.size,
-                    'subject': serializer.validated_data['subject']
-                    }
-        blob.upload_from_file(file, content_type=file.content_type)
+        blob.upload_from_file(file)
 
         # Return a success response
         return Response({'message': 'File uploaded successfully.'}, status=status.HTTP_201_CREATED)
@@ -54,31 +44,22 @@ class FileUploadView(views.APIView):
         
         # Get the blobs
         blobs = bucket.list_blobs()
-
-        #Create a list to store blobs and their metadat
-        files =[]
-        # Loop through the blobs 
-        for blob in blobs:
-            files.append({
-                'name': blob.name,
-                'metadata': blob.metadata
-            })
     
         # Return the list of blob names
-        return Response(files, status=status.HTTP_200_OK)
+        return Response([blob.name for blob in blobs], status=status.HTTP_200_OK)
 
 class FileDownloaderView(views.APIView):
     
     parser_classes = [MultiPartParser]
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         #Get the file name
-        file_name = request.query_params.get('file')
+        file_name = request.query_params.get('file_name')
         if not file_name:
             return Response({'error': 'File name not provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Create a Cloud Storage client
+         # Create a Cloud Storage client
         client = storage.Client()
         
         # Get the bucket
@@ -95,27 +76,3 @@ class FileDownloaderView(views.APIView):
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
 
         return response
-
-class FileSearchView(views.APIView):
-    def get(self, request):
-        # Extract search term from request (assuming query string)
-        file = request.query_params.get('file')
-
-        # Check if search term is provided
-        if not file:
-            return Response({'error': 'Missing search term parameter'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Create a Cloud Storage client
-        client = storage.Client()
-        
-        # Get the bucket
-        bucket = client.bucket(bucket_name)
-
-        # List all blobs in the bucket (adjust for filtering based on search term)
-        blobs = bucket.list_blobs()
-
-        # Filter results based on search term (implement your logic here)
-        filtered_files = [blob.name for blob in blobs if file in blob.name]  # Simple example
-
-        # Return search results
-        return Response({'files': filtered_files}, status=status.HTTP_200_OK)
