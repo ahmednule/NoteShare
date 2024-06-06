@@ -1,8 +1,8 @@
-<template>
-    <v-container class="profile-container">
-      <v-row>
+<template >
+    <v-container>
+      <v-row class="gradient-container">
         <v-col cols="12" md="4">
-          <v-card>
+          <v-card class="gradient-container">
             <v-card-title class="justify-center">
               <h2>Profile</h2>
             </v-card-title>
@@ -31,7 +31,7 @@
           </v-card>
         </v-col>
         <v-col cols="12" md="8">
-          <v-card>
+          <v-card class="gradient-container">
             <v-tabs v-model="tab" grow>
               <v-tab>Upload Notes</v-tab>
               <v-tab>Access Notes</v-tab>
@@ -121,5 +121,17 @@
   .v-btn {
     margin-top: 10px;
   }
+  .custom-container {
+  background-color:#055e64;
+  padding: 20px;
+}
+.custom-footer {
+  background-color: linear-gradient( to right, #055e64, rgb(38, 70, 10));
+  padding: 20px;
+}
+.gradient-container {
+  background: linear-gradient(to right, #8ecece, rgb(37, 69, 78));
+  padding: 20px;
+}
   </style>
   
