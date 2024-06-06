@@ -28,9 +28,15 @@
           <v-card class="pa-5" outlined>
             <v-card-title>Education Levels</v-card-title>
             <v-card-subtitle>
-              <v-btn color="primary" class="ma-2" @click="selectLevel('University')">University</v-btn>
-              <v-btn color="primary" class="ma-2" @click="selectLevel('High School')">High School</v-btn>
-              <v-btn color="primary" class="ma-2" @click="selectLevel('College')">College</v-btn>
+              <v-btn text  class="ma-2">
+                <router-link to="/University" color="primary" class="white--text">University</router-link>
+              </v-btn>
+              <v-btn text>
+                <router-link to="/Highschool" color="primary" class="blue--text">High School</router-link>
+              </v-btn>
+              <v-btn text>
+                <router-link to="/College" color="primary" class="white--text">College</router-link>
+              </v-btn>
             </v-card-subtitle>
           </v-card>
         </v-col>
