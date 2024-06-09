@@ -39,7 +39,7 @@
         'storages',
     ]
     ```
-## Step 4: Configure the database using sql version >= 8.0
+## Step 3: Configure the database using sql version >= 8.0
 1 **Using the setupdb.sql**:
     ```sh
     cat setupdb.sql | mysql -u root -p
@@ -65,13 +65,13 @@
 Your Django server should now be up and running, with REST API endpoints and Google Cloud Storage configured.
 
 
-# 1 . API'S Documentation
+# 1. User API'S Documentation
 
 ## UserViewSet
 
 **Description:** This endpoint retrieves user information using the token sent with the request.
 
-- **URL:** `/user/`
+- **URL:** `api/get_user/`
 - **Method:** `GET`
 - **Permissions required:** `IsAuthenticated`
 - **Authentication required:** `TokenAuthentication`
@@ -84,7 +84,7 @@ Your Django server should now be up and running, with REST API endpoints and Goo
 
 **Description:** This endpoint handles the login of the user.
 
-- **URL:** `/login/`
+- **URL:** `api/login/`
 - **Method:** `POST`
 - **Permissions required:** `AllowAny`
 
@@ -100,13 +100,15 @@ Your Django server should now be up and running, with REST API endpoints and Goo
 
 **Description:** This endpoint handles user registration.
 
-- **URL:** `/register/`
+- **URL:** `/api/register/`
 - **Method:** `POST`
 - **Permissions required:** `AllowAny`
 
 **Request Body:**
 - `username`: string
 - `email`: string
+- `first_name`: string
+- `last_name`: string
 - `password`: string
 
 **Response:**
@@ -119,7 +121,7 @@ Your Django server should now be up and running, with REST API endpoints and Goo
 
 **Description:** This endpoint retrieves all users.
 
-- **URL:** `/users/`
+- **URL:** `api/all_users/`
 - **Method:** `GET`
 - **Permissions required:** `AllowAny`
 
