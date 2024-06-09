@@ -78,6 +78,11 @@ Your Django server should now be up and running, with REST API endpoints and Goo
 - **Status 200:** User information in JSON format.
 - **Status 404:** User not found.
 
+#### Example Request
+```bash
+curl -X GET -H "Authorization: Token <your-token>"  http://127.0.0.1:8000/api/get_user/
+```
+
 ## UserLoginView
 
 **Description:** This endpoint handles the login of the user.
@@ -94,11 +99,16 @@ Your Django server should now be up and running, with REST API endpoints and Goo
 - **Status 200:** Token in JSON format.
     - `token`: string
 
+#### Example Request
+```bash
+ curl -X POST -H "Content-Type: application/json" -d '{"username": "<your_username>", "password": "<your_password"}' http://127.0.0.1:8000/api/login/
+```
+
 ## UserRegisterView
 
 **Description:** This endpoint handles user registration.
 
-- **URL:** `/api/register/`
+- **URL:** `/api/signup/`
 - **Method:** `POST`
 - **Permissions required:** `AllowAny`
 
@@ -115,6 +125,12 @@ Your Django server should now be up and running, with REST API endpoints and Goo
     - `user_id`: integer
     - `email`: string
 
+#### Example Request
+```bash
+  curl -X POST -H "Content-Type: application/json" -d '{"username": "<your_username>", "email": "<your_email@gmail.com>", "first_name": "<first_name>", "last_name": "<last_name>", "password":"<your_password>"}' http://127.0.0.1:8000/api/signup/
+```
+
+
 ## AllUsersView
 
 **Description:** This endpoint retrieves all users.
@@ -126,6 +142,10 @@ Your Django server should now be up and running, with REST API endpoints and Goo
 **Response:**
 - **Status 200:** List of users in JSON format.
 
+#### Example Request
+```bash
+curl -X GET   http://127.0.0.1:8000/api/all_users/
+```
 
 # 2. FILES API'S Documentation
 
