@@ -41,9 +41,9 @@
     ```
 ## Step 3: Configure the database using sql version >= 8.0
 1 **Using the setupdb.sql**:
-    ```sh
+    ``
     cat setupdb.sql | mysql -u root -p
-    ```
+    ``
 
 ## Step 4: Run the Django Server
 
