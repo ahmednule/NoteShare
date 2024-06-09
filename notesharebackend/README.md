@@ -22,7 +22,7 @@
     pip install google-cloud-storage
     ```
 
-3. **Set up Google Cloud Service key to the GOOGLE_CREDENTIALS variable**:
+3. **Set up Google Cloud Service key to the GOOGLE_CREDENTIALS variable(Dont push the service key it is a secret)**:
     ```python
     export GOOGLE_CREDENTIALS='/path/to/your/service-account-file.json'
     ```
@@ -41,9 +41,7 @@
     ```
 ## Step 3: Configure the database using sql version >= 8.0
 1 **Using the setupdb.sql**:
-    ``
-    cat setupdb.sql | mysql -u root -p
-    ``
+    `` cat setupdb.sql | mysql -u root -p ``
 
 ## Step 4: Run the Django Server
 
