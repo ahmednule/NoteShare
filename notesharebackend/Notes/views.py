@@ -7,14 +7,17 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from google.auth import default
 from .serializers import FileUploadSerializer
+from rest_framework.authentication import TokenAuthentication
 
 credentials, project_id = default()
-bucket_name ='nyams-noteshare'
+bucket_name ='noteshare_files_storage'
 
 
 class FileUploadView(views.APIView):
     parser_classes = [MultiPartParser]
     permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
 
     def post(self, request):
         serializer = FileUploadSerializer(data=request.data)
@@ -22,37 +25,30 @@ class FileUploadView(views.APIView):
 
         # Get the uploaded file
         file = serializer.validated_data['file']
+        metadata={
+            'uploaded_by': request.user.username,
+            'content_type': file.content_type,
+            'size': file.size,
+        }
+        try:
+            # Create a Cloud Storage client
+            client = storage.Client()
 
-        # Create a Cloud Storage client
-        client = storage.Client()
+            # Get the bucket
+            bucket = client.bucket(bucket_name)
 
-        # Get the bucket
-        bucket = client.bucket(bucket_name)
+            # Create a new blob and upload the file
+            blob = bucket.blob(file.name)
+            blob.upload_from_file(file, content_type=file.content_type)
+            blob.metadata = metadata
 
-        # Create a new blob and upload the file
-        blob = bucket.blob(file.name)
-        blob.upload_from_file(file)
-
-        # Return a success response
-        return Response({'message': 'File uploaded successfully.'}, status=status.HTTP_201_CREATED)
-    def get(self, request):
-        # Create a Cloud Storage client
-        client = storage.Client()
-
-        # Get the bucket
-        bucket = client.bucket(bucket_name)
-        
-        # Get the blobs
-        blobs = bucket.list_blobs()
+            # Return a success response
+            return Response({'message': 'File uploaded successfully.'}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-        # Return the list of blob names
-        return Response([blob.name for blob in blobs], status=status.HTTP_200_OK)
-
 class FileDownloaderView(views.APIView):
-    
     parser_classes = [MultiPartParser]
-    permission_classes = [IsAuthenticated]
-
     def get(self, request):
         #Get the file name
         file_name = request.query_params.get('file_name')
@@ -76,3 +72,17 @@ class FileDownloaderView(views.APIView):
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
 
         return response
+    
+class FileSearchView(views.APIView):
+    def get(self, request):
+        # Create a Cloud Storage client
+        client = storage.Client()
+
+        # Get the bucket
+        bucket = client.bucket(bucket_name)
+        
+        # Get the blobs
+        blobs = bucket.list_blobs()
+    
+        # Return the list of blob names
+        return Response([blob.name for blob in blobs], status=status.HTTP_200_OK)

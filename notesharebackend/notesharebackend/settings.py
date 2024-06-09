@@ -46,9 +46,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 ]
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-GOOGLE_APPLICATION_CREDENTIALS = os.path.join(BASE_DIR, 'noteshare-424406-7bb497c4f4d3.json')
-GS_BUCKET_NAME = 'nyams-noteshare'
-GS_PROJECT_ID = 'noteshare-424406'
+GOOGLE_APPLICATION_CREDENTIALS = '/home/nyams/gcloud/noteshare-backup-d0d539dfc492.json'
+GS_BUCKET_NAME = 'noteshare_files_storage'
+GS_PROJECT_ID = 'noteshare-backup'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -137,6 +137,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'User.User'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -145,4 +149,16 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+}
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        # Other renderers if necessary
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
 }
