@@ -1,5 +1,5 @@
 
-# API Documentation
+# 1. FILES API'S Documentation
 
 ## Authentication
 All endpoints require token authentication. Ensure you include the token in the `Authorization` header as `Token <your-token>`.
@@ -152,3 +152,4 @@ Handles listing of all files in Google Cloud Storage.
 ```
 
 These endpoints should help you upload, download, and list files in your Google Cloud Storage bucket, provided the correct authentication token is used.
+
