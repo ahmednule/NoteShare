@@ -1,10 +1,8 @@
 from rest_framework import serializers
 from .models import File
 
-class FileSerializer(serializers.Serializer):
+class FileUploadSerializer(serializers.Serializer):
     file = serializers.FileField()
-    subject = serializers.CharField(max_length=100)
-    user = serializers.CurrentUserDefault()
 
 class FileUploadSerializer(serializers.ModelSerializer):
     class Meta:

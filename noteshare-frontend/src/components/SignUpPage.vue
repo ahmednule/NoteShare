@@ -1,62 +1,127 @@
 <template>
-    <form>
-<label> First Name: </label>
-<input type="text" required />
-<label> Last Name: </label>
-<input type="text" required />
-<label> Email: </label>
-<input type="email" required />
-<Label> Passwword </Label>
-<input type="password" required />
-
-<button type="submit" @click='signUp'> Create Account </button>
-</form>
+  <div class="signup-background">
+    <v-container class="signup-container custom-container">
+    <v-row justify="center">
+      <v-col cols="12" md="6">
+        <v-card class="pa-5 gradient-container">
+          <v-card-title class="justify-center">
+            <img src="../assets/images/logo1.jpeg" class="logo" alt="Logo" />
+          </v-card-title>
+          <v-card-subtitle class="text-center">
+            <h1>Sign Up</h1>
+          </v-card-subtitle>
+          <v-form  v-model="valid" ref="form">
+            <v-text-field
+              v-model="name"
+              :rules="[rules.required]"
+              label="Enter Name"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="email"
+              :rules="[rules.required, rules.email]"
+              label="Enter Email"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="password"
+              :rules="[rules.required, rules.min(6)]"
+              label="Enter Password"
+              type="password"
+              required
+            ></v-text-field>
+            <v-text-field
+            v-model="password"
+            :rules="[rules.required, rules.matchpassword]"
+            label="Confirm Password"
+            type="password"
+            required
+            ></v-text-field>
+            <v-btn class="register-button" color="primary" @click="submit">
+              Sign Up
+            </v-btn>
+          </v-form>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</div>
 </template>
+
 <script>
-
+export default {
+  name: 'SignUp',
+  data() {
+    return {
+      valid: false,
+      name: '',
+      email: '',
+      password: '',
+      rules: {
+        required: value => !!value || 'Required.',
+        email: value => {
+          const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          return pattern.test(value) || 'Invalid e-mail.'
+        },
+        min: v => v.length >= 6 || 'Min 6 characters',
+      },
+    }
+  },
+  methods: {
+    submit() {
+      if (this.$refs.form.validate()) {
+        // Handle form submission
+        alert('Form Submitted!')
+      }
+    },
+  },
+}
 </script>
-<style>
-form{
-    max-width: 420px;
-    margin: 30px auto;
-    padding:40px;
-    text-align: left;
-    background: white;
-    border-radius: 10px;
 
+<style scoped>
+.signup-container {
+  background-color:#055e64;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-label{
-    color:rgb(17, 65, 80);
-    display:inline-block;
-    margin:25px 0 5px;
-    font-family: 'Times New Roman', Times, serif;;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+custom-container {
+  background-color:#055e64;
+  padding: 20px;
+}
 
+.gradient-container {
+  background: linear-gradient(to right, #8ecece, rgb(37, 69, 78));
+  padding: 20px;
 }
-input{
-    width: 100%;
-    display:block;
-    padding: 10px 6px;
-    margin: 5px 0;
-    box-sizing: border-box;
-    border:none;
-    border-bottom: 1px solid #ddd;
-    color:#555;
+.logo {
+  width: 100px;
+}
 
-    
+.pa-5 {
+  padding: 20px;
 }
-button{
-    margin:20px 0;
-    padding: 30px;
-    max-width: 180px;
-    width: 100%;
-    border: 2px solid #5f6bd4;
-    background: rgb(172, 172, 199);
-    border-radius: 10px;
-    display: block;
-    text-align: center;
-    left:90px;
+
+.text-center {
+  text-align: center;
 }
+
+.v-card-title, .v-card-subtitle {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.register-button {
+  width: 320px;
+  cursor: pointer;
+  height: 40px;
+  color: #fff;
+  border: 1px;
+}
+.signup-background {
+  background: linear-gradient(to right, #006064, #80CBC4);
+  padding: 40px 0;
+}
+
 </style>
