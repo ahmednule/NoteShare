@@ -29,6 +29,11 @@ class FileUploadView(views.APIView):
             'uploaded_by': request.user.username,
             'content_type': file.content_type,
             'size': file.size,
+            'content_disposition': f'attachment; filename="{file.name}"',
+            'content_language': 'en-US',
+            'content_encoding': 'g-zip',
+            'cache_control': 'public, max-age=31536000',
+
         }
         try:
             # Create a Cloud Storage client
