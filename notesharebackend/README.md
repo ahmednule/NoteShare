@@ -14,74 +14,17 @@
     pip install django djangorestframework
     ```
 
-3. **Create a new Django project**:
-    ```sh
-    django-admin startproject myproject
-    cd myproject
-    ```
 
-4. **Create a new Django app**:
-    ```sh
-    python manage.py startapp myapp
-    ```
-
-## Step 2: Configure the Django Project
-
-1. **Add the app and REST framework to `INSTALLED_APPS` in `myproject/settings.py`**:
-    ```python
-    INSTALLED_APPS = [
-        ...
-        'rest_framework',
-        'myapp',
-    ]
-    ```
-
-2. **Create models, serializers, and views** in `myapp` (e.g., `models.py`, `serializers.py`, `views.py`).
-
-3. **Add URLs** in `myapp/urls.py` and include them in the project's `urls.py`:
-    ```python
-    from django.urls import path, include
-    from myapp import views
-
-    urlpatterns = [
-        path('user/', views.UserViewSet.as_view()),
-        path('login/', views.UserLoginView.as_view()),
-        path('register/', views.UserRegisterView.as_view()),
-        path('users/', views.AllUsersView.as_view()),
-    ]
-    ```
-    In `myproject/urls.py`:
-    ```python
-    from django.contrib import admin
-    from django.urls import path, include
-
-    urlpatterns = [
-        path('admin/', admin.site.urls),
-        path('api/', include('myapp.urls')),
-    ]
-    ```
-
-## Step 3: Set Up Google Cloud Storage
+## Step 2: Set Up Google Cloud Storage
 
 1. **Install the Google Cloud Storage client library**:
     ```sh
     pip install google-cloud-storage
     ```
 
-2. **Create a service account** in the Google Cloud Console and download the JSON key file.
-
-3. **Set up Google Cloud Storage in your Django settings**:
+3. **Set up Google Cloud Service key to the GOOGLE_CREDENTIALS variable**:
     ```python
-    # In myproject/settings.py
-    from google.oauth2 import service_account
-
-    GOOGLE_CREDENTIALS = service_account.Credentials.from_service_account_file(
-        '/path/to/your/service-account-file.json'
-    )
-
-    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    GS_BUCKET_NAME = 'your-bucket-name'
-    GS_CREDENTIALS = GOOGLE_CREDENTIALS
+    export GOOGLE_CREDENTIALS='/path/to/your/service-account-file.json'
     ```
 
 4. **Install Django storage package**:
@@ -95,6 +38,11 @@
         ...
         'storages',
     ]
+    ```
+## Step 4: Configure the database using sql version >= 8.0
+1 **Using the setupdb.sql**:
+    ```sh
+    cat setupdb.sql | mysql -u root -p
     ```
 
 ## Step 4: Run the Django Server
